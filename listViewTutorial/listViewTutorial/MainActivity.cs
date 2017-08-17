@@ -8,8 +8,8 @@ namespace listViewTutorial
     [Activity(Label = "listViewTutorial", MainLauncher = true)]
     public class MainActivity : Activity
     {
-        //int count = 1;
-        private List<string> mItems;
+
+        private List<Person> mItems;
         private ListView mListView;
 
         protected override void OnCreate(Bundle bundle)
@@ -20,16 +20,13 @@ namespace listViewTutorial
             SetContentView(Resource.Layout.Main);
             mListView = FindViewById<ListView>(Resource.Id.myListView);
 
-            mItems = new List<string>();
-            mItems.Add("Bob");
-            mItems.Add("Tom");
-            mItems.Add("Jim");
+            mItems = new List<Person>();
+
+            mItems.Add(new Person() { FirstName = "Joe", LastName = "Smith", Age = "22", Gender = "Male" });
+            mItems.Add(new Person() { FirstName = "Tom", LastName = "Tom", Age = "35", Gender = "Male" });
+            mItems.Add(new Person() { FirstName = "Sally", LastName = "Susan", Age = "88", Gender = "Female" });
 
             MyListViewAdapter adapter = new MyListViewAdapter(this, mItems);
-
-            string indexTest = adapter.mItems[1];
-
-
 
             mListView.Adapter = adapter;
 
