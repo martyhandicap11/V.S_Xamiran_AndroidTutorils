@@ -45,7 +45,8 @@
         android:background="@drawable/ButtonSignUpStyle"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        android:drawableLeft="@drawable/envelope_icon01" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
