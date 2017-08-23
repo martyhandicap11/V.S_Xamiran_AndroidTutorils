@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlidingTabLayoutTutorial", "SlidingTabLayoutTutorial\SlidingTabLayoutTutorial.csproj", "{AED97857-4606-40BC-87CB-969BA9F038AF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AED97857-4606-40BC-87CB-969BA9F038AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AED97857-4606-40BC-87CB-969BA9F038AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AED97857-4606-40BC-87CB-969BA9F038AF}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{AED97857-4606-40BC-87CB-969BA9F038AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AED97857-4606-40BC-87CB-969BA9F038AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AED97857-4606-40BC-87CB-969BA9F038AF}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A94DD2B3-4628-482B-92C0-AAD25E6DE3C5}
+	EndGlobalSection
+EndGlobal

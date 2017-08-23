@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xamiran_Android_SlidingLayout", "Xamiran_Android_SlidingLayout\Xamiran_Android_SlidingLayout.csproj", "{FADD7DAF-31C8-4DFD-9B34-79846D231AFF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FADD7DAF-31C8-4DFD-9B34-79846D231AFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FADD7DAF-31C8-4DFD-9B34-79846D231AFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FADD7DAF-31C8-4DFD-9B34-79846D231AFF}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{FADD7DAF-31C8-4DFD-9B34-79846D231AFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FADD7DAF-31C8-4DFD-9B34-79846D231AFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FADD7DAF-31C8-4DFD-9B34-79846D231AFF}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F66BACA2-F7F1-4A41-AB13-59F719E387B2}
+	EndGlobalSection
+EndGlobal
