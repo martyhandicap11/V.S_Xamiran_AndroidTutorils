@@ -12,7 +12,14 @@ using Android.Widget;
 
 namespace Xamiran_Android_SlidingLayout
 {
-    class SlidingTabScrollView
+   public class SlidingTabScrollView
     {
+        public interface TabColorizer
+        {
+            int GetIndicatorColor(int position);
+            int GetDeviderColor(int position);
+        }
+            
+            
     }
 }

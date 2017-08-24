@@ -10,10 +10,11 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Util;
+using Android.Graphics;
 
 namespace Xamiran_Android_SlidingLayout
 {
-    class SlidingTabStrip : LinearLayout
+   public class SlidingTabStrip : LinearLayout
     {
         //Copy and paste from here................................................................
         private const int DEFAULT_BOTTOM_BORDER_THICKNESS_DIPS = 2;
@@ -65,13 +66,64 @@ namespace Xamiran_Android_SlidingLayout
             mDefaultBottomBorderColor = SetColorAlpha(themeForeGround, DEFAULT_BOTTOM_BORDER_COLOR_ALPHA);
 
             mDefaultTabColorizer = new SimpleTabColorizer();
-            mDefaultTabColorizer.SetIndicatorColors(INDICATOR_COLORS);
-            mDefaultTabColorizer.SetDividerColors(DIVIDER_COLORS);
+            mDefaultTabColorizer.IndicatorColors =INDICATOR_COLORS;
+            mDefaultTabColorizer.DeviderColors = DIVIDER_COLORS;
+
+            mBottomBorderThickness = (int)(DEFAULT_BOTTOM_BORDER_THICKNESS_DIPS * density);
+            mBottomBorderPaint = new Android.Graphics.Paint();
+            mBottomBorderPaint.Color = GetColorFromInteger(0xC5C5C5);//GREY
+
+            mSelectedIndicatorThickness = (int)(SELECTED_INDICATOR_THICKNESS_DIPS * density);
+            mSelectedIndicatorPaint = new Paint();
+
+            mDividerHeight = DEFAULT_DIVIDER_HEIGHT;
+            mDividerPaint = new Paint();
+            mDividerPaint.StrokeWidth = (int)(DEFAULT_DIVIDER_THICKNESS_DIPS * density);
+
+        }// End of SlidingTabStrip
+
+        public SlidingTabScrollView.TabColorizer CustomTabColorizer
+        {
+            set
+            {
+                mCustomTabColorizer = value;
+                this.Invalidate();
+            }
+        }
+        
+        public int [] SelectedIndicatorColors
+        {
+            set
+            {
+                mCustomTabColorizer = null;
+                mDefaultTabColorizer.IndicatorColors = value;
+                this.Invalidate();
+            }
+        }
+        
+        public int [] DividerColors
+        {
+            set
+            {
+                mCustomTabColorizer = null;
+                mDefaultTabColorizer.DeviderColors = value;
+                this.Invalidate();
+            }
         }
 
-        private int SetColorAlpha(int themeForeGround, byte DEFAULT_BOTTOM_BORDER_COLOR_ALPHA)
+        private Color GetColorFromInteger(int color)
         {
-            throw new NotImplementedException();
+            return Color.Rgb(Color.GetRedComponent(color),
+                             Color.GetGreenComponent(color),
+                             Color.GetBlueComponent(color)
+                             );
+        }
+
+        private int SetColorAlpha(int color, byte alpha)
+        {
+            return Color.Argb(alpha, Color.GetRedComponent(color),
+                                     Color.GetGreenComponent(color),
+                                     Color.GetBlueComponent(color));
         }
 
         private class SimpleTabColorizer : SlidingTabScrollView.TabColorizer
@@ -79,11 +131,34 @@ namespace Xamiran_Android_SlidingLayout
             private int[] mIndicatorColors;
             private int[] mDeviderColors;
 
+            public int GetIndicatorColor(int position)
+            {
+                return mIndicatorColors[position % mIndicatorColors.Length];
+            }
 
+            public int GetDividerColors(int position)
+            {
+                return mDeviderColors[position % mDeviderColors.Length];
+            }
+
+            public int GetDeviderColor(int position)
+            {
+                throw new NotImplementedException();
+            }
+
+            public int[] IndicatorColors
+            {
+                set { mIndicatorColors = value; }
+
+            }
+
+            public int[] DeviderColors
+            {
+                set { mDeviderColors = value; }
+
+            }
 
         }
 
-
-
-    }// end of class
+   }// end of class
 }//end of namespace
