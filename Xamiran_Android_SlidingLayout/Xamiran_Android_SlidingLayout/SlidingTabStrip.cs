@@ -11,10 +11,11 @@ using Android.Views;
 using Android.Widget;
 using Android.Util;
 using Android.Graphics;
+using Xamiran_Android_SlidingLayout;
 
-namespace Xamiran_Android_SlidingLayout
+namespace SlidingTabLayoutTutorial
 {
-   public class SlidingTabStrip : LinearLayout
+    public class SlidingTabStrip : LinearLayout
     {
         //Copy and paste from here................................................................
         private const int DEFAULT_BOTTOM_BORDER_THICKNESS_DIPS = 2;
@@ -28,15 +29,15 @@ namespace Xamiran_Android_SlidingLayout
 
         //Bottom border
         private int mBottomBorderThickness;
-        private Android.Graphics.Paint mBottomBorderPaint;
+        private Paint mBottomBorderPaint;
         private int mDefaultBottomBorderColor;
 
         //Indicator
         private int mSelectedIndicatorThickness;
-        private Android.Graphics.Paint mSelectedIndicatorPaint;
+        private Paint mSelectedIndicatorPaint;
 
         //Divider
-        private Android.Graphics.Paint mDividerPaint;
+        private Paint mDividerPaint;
         private float mDividerHeight;
 
         //Selected position and offset
@@ -48,13 +49,11 @@ namespace Xamiran_Android_SlidingLayout
         private SimpleTabColorizer mDefaultTabColorizer;
         //Stop copy and paste here........................................................................
 
-        //Constructor
+        //Constructors
         public SlidingTabStrip(Context context) : this(context, null)
-        {
+        { }
 
-        }
-        
-        public SlidingTabStrip (Context context, IAttributeSet attrs) : base(context,attrs)
+        public SlidingTabStrip(Context context, IAttributeSet attrs) : base(context, attrs)
         {
             SetWillNotDraw(false);
 
@@ -66,12 +65,12 @@ namespace Xamiran_Android_SlidingLayout
             mDefaultBottomBorderColor = SetColorAlpha(themeForeGround, DEFAULT_BOTTOM_BORDER_COLOR_ALPHA);
 
             mDefaultTabColorizer = new SimpleTabColorizer();
-            mDefaultTabColorizer.IndicatorColors =INDICATOR_COLORS;
-            mDefaultTabColorizer.DeviderColors = DIVIDER_COLORS;
+            mDefaultTabColorizer.IndicatorColors = INDICATOR_COLORS;
+            mDefaultTabColorizer.DividerColors = DIVIDER_COLORS;
 
             mBottomBorderThickness = (int)(DEFAULT_BOTTOM_BORDER_THICKNESS_DIPS * density);
-            mBottomBorderPaint = new Android.Graphics.Paint();
-            mBottomBorderPaint.Color = GetColorFromInteger(0xC5C5C5);//GREY
+            mBottomBorderPaint = new Paint();
+            mBottomBorderPaint.Color = GetColorFromInteger(0xC5C5C5); //Gray
 
             mSelectedIndicatorThickness = (int)(SELECTED_INDICATOR_THICKNESS_DIPS * density);
             mSelectedIndicatorPaint = new Paint();
@@ -79,8 +78,7 @@ namespace Xamiran_Android_SlidingLayout
             mDividerHeight = DEFAULT_DIVIDER_HEIGHT;
             mDividerPaint = new Paint();
             mDividerPaint.StrokeWidth = (int)(DEFAULT_DIVIDER_THICKNESS_DIPS * density);
-
-        }// End of SlidingTabStrip
+        }
 
         public SlidingTabScrollView.TabColorizer CustomTabColorizer
         {
@@ -90,8 +88,8 @@ namespace Xamiran_Android_SlidingLayout
                 this.Invalidate();
             }
         }
-        
-        public int [] SelectedIndicatorColors
+
+        public int[] SelectedIndicatorColors
         {
             set
             {
@@ -100,45 +98,102 @@ namespace Xamiran_Android_SlidingLayout
                 this.Invalidate();
             }
         }
-        
-        public int [] DividerColors
+
+        public int[] DividerColors
         {
             set
             {
-                mCustomTabColorizer = null;
-                mDefaultTabColorizer.DeviderColors = value;
+                mDefaultTabColorizer = null;
+                mDefaultTabColorizer.DividerColors = value;
                 this.Invalidate();
             }
         }
 
         private Color GetColorFromInteger(int color)
         {
-            return Color.Rgb(Color.GetRedComponent(color),
-                             Color.GetGreenComponent(color),
-                             Color.GetBlueComponent(color)
-                             );
+            return Color.Rgb(Color.GetRedComponent(color), Color.GetGreenComponent(color), Color.GetBlueComponent(color));
         }
 
         private int SetColorAlpha(int color, byte alpha)
         {
-            return Color.Argb(alpha, Color.GetRedComponent(color),
-                                     Color.GetGreenComponent(color),
-                                     Color.GetBlueComponent(color));
+            return Color.Argb(alpha, Color.GetRedComponent(color), Color.GetGreenComponent(color), Color.GetBlueComponent(color));
+        }
+
+        public void OnViewPagerPageChanged(int position, float positionOffset)
+        {
+            mSelectedPosition = position;
+            mSelectionOffset = positionOffset;
+            this.Invalidate();
+        }
+
+        protected override void OnDraw(Canvas canvas)
+        {
+            int height = Height;
+            int tabCount = ChildCount;
+            int dividerHeightPx = (int)(Math.Min(Math.Max(0f, mDividerHeight), 1f) * height);
+            SlidingTabScrollView.TabColorizer tabColorizer = mCustomTabColorizer != null ? mCustomTabColorizer : mDefaultTabColorizer;
+
+            //Thick colored underline below the current selection
+            if (tabCount > 0)
+            {
+                View selectedTitle = GetChildAt(mSelectedPosition);
+                int left = selectedTitle.Left;
+                int right = selectedTitle.Right;
+                int color = tabColorizer.GetIndicatorColor(mSelectedPosition);
+
+                if (mSelectionOffset > 0f && mSelectedPosition < (tabCount - 1))
+                {
+                    int nextColor = tabColorizer.GetIndicatorColor(mSelectedPosition + 1);
+                    if (color != nextColor)
+                    {
+                        color = blendColor(nextColor, color, mSelectionOffset);
+                    }
+
+                    View nextTitle = GetChildAt(mSelectedPosition + 1);
+                    left = (int)(mSelectionOffset * nextTitle.Left + (1.0f - mSelectionOffset) * left);
+                    right = (int)(mSelectionOffset * nextTitle.Right + (1.0f - mSelectionOffset) * right);
+                }
+
+                mSelectedIndicatorPaint.Color = GetColorFromInteger(color);
+
+                canvas.DrawRect(left, height - mSelectedIndicatorThickness, right, height, mSelectedIndicatorPaint);
+
+                //Creat vertical dividers between tabs
+                int separatorTop = (height - dividerHeightPx) / 2;
+                for (int i = 0; i < ChildCount; i++)
+                {
+                    View child = GetChildAt(i);
+                    mDividerPaint.Color = GetColorFromInteger(tabColorizer.GetDividerColor(i));
+                    canvas.DrawLine(child.Right, separatorTop, child.Right, separatorTop + dividerHeightPx, mDividerPaint);
+                }
+
+                canvas.DrawRect(0, height - mBottomBorderThickness, Width, height, mBottomBorderPaint);
+            }
+        }
+
+        private int blendColor(int color1, int color2, float ratio)
+        {
+            float inverseRatio = 1f - ratio;
+            float r = (Color.GetRedComponent(color1) * ratio) + (Color.GetRedComponent(color2) * inverseRatio);
+            float g = (Color.GetGreenComponent(color1) * ratio) + (Color.GetGreenComponent(color2) * inverseRatio);
+            float b = (Color.GetBlueComponent(color1) * ratio) + (Color.GetBlueComponent(color2) * inverseRatio);
+
+            return Color.Rgb((int)r, (int)g, (int)b);
         }
 
         private class SimpleTabColorizer : SlidingTabScrollView.TabColorizer
         {
             private int[] mIndicatorColors;
-            private int[] mDeviderColors;
+            private int[] mDividerColors;
 
             public int GetIndicatorColor(int position)
             {
                 return mIndicatorColors[position % mIndicatorColors.Length];
             }
 
-            public int GetDividerColors(int position)
+            public int GetDividerColor(int position)
             {
-                return mDeviderColors[position % mDeviderColors.Length];
+                return mDividerColors[position % mDividerColors.Length];
             }
 
             public int GetDeviderColor(int position)
@@ -149,16 +204,12 @@ namespace Xamiran_Android_SlidingLayout
             public int[] IndicatorColors
             {
                 set { mIndicatorColors = value; }
-
             }
 
-            public int[] DeviderColors
+            public int[] DividerColors
             {
-                set { mDeviderColors = value; }
-
+                set { mDividerColors = value; }
             }
-
         }
-
-   }// end of class
-}//end of namespace
+    }
+}
