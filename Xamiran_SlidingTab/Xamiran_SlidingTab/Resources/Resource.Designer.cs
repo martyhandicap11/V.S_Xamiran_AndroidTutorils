@@ -55,7 +55,9 @@ namespace Xamiran_SlidingTab
 			private Layout()
 			{
 			}
-		}
+
+            public static int fragment_sample { get; internal set; }
+        }
 		
 		public partial class String
 		{
