@@ -28,7 +28,7 @@ namespace Xamiran_SlidingTab
 
         //Bottom border
         private int mBottomBorderThickness;
-        private Android.Graphics.Paint mBottomBorderPaint;
+        private Paint mBottomBorderPaint;
         private int mDefaultBottomBorderColor;
 
         //Indicator
@@ -79,7 +79,7 @@ namespace Xamiran_SlidingTab
             mDividerPaint.StrokeWidth = (int)(DEFAULT_DIVIDER_THICKNESS_DIPS * density);
         }
 
-        public SlidingTabScrollView.TabColorizer  CustomTabColorizer
+        public SlidingTabScrollView.TabColorizer CustomTabColorizer
         {
             set
             {

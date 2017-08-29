@@ -94,6 +94,7 @@ namespace Xamiran_SlidingTab
             }
         }
 
+        public int MTabViewLayoutID { get => mTabViewLayoutID; set => mTabViewLayoutID = value; }
 
         void value_PageScrolled(object sender, ViewPager.PageScrolledEventArgs e)
         {

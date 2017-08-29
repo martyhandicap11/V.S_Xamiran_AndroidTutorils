@@ -41,11 +41,70 @@ namespace Xamiran_SlidingTab
 			}
 		}
 		
-		public partial class Layout
+		public partial class Drawable
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int Main = 2130837504;
+			public const int ic_action_overflow = 2130837504;
+			
+			// aapt resource value: 0x7f020001
+			public const int xs = 2130837505;
+			
+			static Drawable()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Drawable()
+			{
+			}
+		}
+		
+		public partial class Id
+		{
+			
+			// aapt resource value: 0x7f060004
+			public const int item_subtitle = 2131099652;
+			
+			// aapt resource value: 0x7f060005
+			public const int item_title = 2131099653;
+			
+			// aapt resource value: 0x7f060006
+			public const int menu = 2131099654;
+			
+			// aapt resource value: 0x7f060003
+			public const int sample_content_fragment = 2131099651;
+			
+			// aapt resource value: 0x7f060002
+			public const int sample_main_layout = 2131099650;
+			
+			// aapt resource value: 0x7f060000
+			public const int sliding_tabs = 2131099648;
+			
+			// aapt resource value: 0x7f060001
+			public const int viewpager = 2131099649;
+			
+			static Id()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Id()
+			{
+			}
+		}
+		
+		public partial class Layout
+		{
+			
+			// aapt resource value: 0x7f030000
+			public const int fragment_sample = 2130903040;
+			
+			// aapt resource value: 0x7f030001
+			public const int Main = 2130903041;
+			
+			// aapt resource value: 0x7f030002
+			public const int page_item = 2130903042;
 			
 			static Layout()
 			{
@@ -55,15 +114,29 @@ namespace Xamiran_SlidingTab
 			private Layout()
 			{
 			}
-
-            public static int fragment_sample { get; internal set; }
-        }
+		}
+		
+		public partial class Menu
+		{
+			
+			// aapt resource value: 0x7f050000
+			public const int actionbar_main = 2131034112;
+			
+			static Menu()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Menu()
+			{
+			}
+		}
 		
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f030000
-			public const int app_name = 2130903040;
+			// aapt resource value: 0x7f040000
+			public const int app_name = 2130968576;
 			
 			static String()
 			{
