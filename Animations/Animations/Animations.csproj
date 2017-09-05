@@ -54,6 +54,7 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExtMethods.cs" />
     <Compile Include="Friends.cs" />
     <Compile Include="FriendsAdapter.cs" />
     <Compile Include="MainActivity.cs" />

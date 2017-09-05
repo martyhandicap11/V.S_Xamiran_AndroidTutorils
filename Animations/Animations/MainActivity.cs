@@ -8,6 +8,7 @@ using Android.OS;
 using System.Collections.Generic;
 using Android.Views.InputMethods;
 using Animations;
+using System.Linq;
 
 namespace Animations
 {
@@ -20,6 +21,7 @@ namespace Animations
         private LinearLayout mContainer;
         private bool mAnimatedDown;
         private bool mIsAnimating;
+        private FriendsAdapter mAdapter;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -32,6 +34,7 @@ namespace Animations
             mContainer = FindViewById<LinearLayout>(Resource.Id.llContainer);
 
             mSearch.Alpha = 0;
+            mSearch.TextChanged += MSearch_TextChanged;
 
             mFriends = new List<Friend>();
             mFriends.Add(new Friend { FirstName = "Bob", LastName = "Smith", Age = "33", Gender = "Male" });
@@ -42,8 +45,21 @@ namespace Animations
             mFriends.Add(new Friend { FirstName = "Ruth", LastName = "White", Age = "81", Gender = "Female" });
             mFriends.Add(new Friend { FirstName = "Sally", LastName = "Johnson", Age = "54", Gender = "Female" });
 
-            FriendsAdapter adapter = new FriendsAdapter(this, Resource.Layout.row_friend, mFriends);
-            mListView.Adapter = adapter;
+            mAdapter = new FriendsAdapter(this, Resource.Layout.row_friend, mFriends);
+            mListView.Adapter = mAdapter;
+        }
+
+        private void MSearch_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
+        {
+            List<Friend> searchedFriends = (from friend in mFriends
+                                            where friend.FirstName.Contains(mSearch.Text,StringComparison.OrdinalIgnoreCase)
+                                            || friend.LastName.Contains(mSearch.Text,StringComparison.OrdinalIgnoreCase)
+                                            || friend.Age.Contains(mSearch.Text,StringComparison.OrdinalIgnoreCase)
+                                            || friend.Gender.Contains(mSearch.Text,StringComparison.OrdinalIgnoreCase)
+                                            select friend).ToList<Friend>();
+
+            mAdapter = new FriendsAdapter(this, Resource.Layout.row_friend, searchedFriends);
+            mListView.Adapter = mAdapter;
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)

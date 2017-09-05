@@ -39,7 +39,7 @@
        android:width="3dp"
        android:color="#D2D2D2">
       </stroke>
-      
+
       <corners
         android:radius="2dp">
       </corners>
