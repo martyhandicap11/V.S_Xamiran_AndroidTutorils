@@ -23,6 +23,17 @@ namespace Animations
         private bool mIsAnimating;
         private FriendsAdapter mAdapter;
 
+        private TextView mTxtHeaderFirstname;
+        private TextView mTxtHeaderLastname;
+        private TextView mTxtHeaderAge;
+        private TextView mTxtHeaderGender;
+
+        private bool mFirstnameAscending;
+        private bool mLastnameAscending;
+        private bool mAgeAscending;
+        private bool mGenderAscending;
+
+
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -33,7 +44,20 @@ namespace Animations
             mSearch = FindViewById<EditText>(Resource.Id.etSearch);
             mContainer = FindViewById<LinearLayout>(Resource.Id.llContainer);
 
+            mTxtHeaderFirstname = FindViewById<TextView>(Resource.Id.txtHeaderFirstname);
+            mTxtHeaderLastname = FindViewById<TextView>(Resource.Id.txtHeaderLastname);
+            mTxtHeaderAge = FindViewById<TextView>(Resource.Id.txtHeaderAge);
+            mTxtHeaderGender = FindViewById<TextView>(Resource.Id.txtHeaderGender);
+
+            mTxtHeaderFirstname.Click += MTxtHeaderFirstname_Click;
+            mTxtHeaderLastname.Click += MTxtHeaderLastname_Click;
+            mTxtHeaderAge.Click += MTxtHeaderAge_Click;
+            mTxtHeaderGender.Click += MTxtHeaderGender_Click;
+
+
+
             mSearch.Alpha = 0;
+            mContainer.BringToFront();
             mSearch.TextChanged += MSearch_TextChanged;
 
             mFriends = new List<Friend>();
@@ -47,6 +71,118 @@ namespace Animations
 
             mAdapter = new FriendsAdapter(this, Resource.Layout.row_friend, mFriends);
             mListView.Adapter = mAdapter;
+        }
+
+        private void MTxtHeaderGender_Click(object sender, EventArgs e)
+        {
+            List<Friend> filterFriends;
+
+            if (!mGenderAscending)
+            {
+                filterFriends = (from friend in mFriends
+                                 orderby friend.Gender
+                                 select friend).ToList<Friend>();
+
+                //Refresh the listview
+                mAdapter = new FriendsAdapter(this, Resource.Layout.row_friend, filterFriends);
+                mListView.Adapter = mAdapter;
+
+            }
+            else
+            {
+                filterFriends = (from friend in mFriends
+                                 orderby friend.Gender descending
+                                 select friend).ToList<Friend>();
+
+                //Refresh the listview
+                mAdapter = new FriendsAdapter(this, Resource.Layout.row_friend, filterFriends);
+                mListView.Adapter = mAdapter;
+            }
+            mGenderAscending = !mGenderAscending;
+        }
+
+        private void MTxtHeaderAge_Click(object sender, EventArgs e)
+        {
+            List<Friend> filterFriends;
+
+            if (!mAgeAscending)
+            {
+                filterFriends = (from friend in mFriends
+                                 orderby friend.Age
+                                 select friend).ToList<Friend>();
+
+                //Refresh the listview
+                mAdapter = new FriendsAdapter(this, Resource.Layout.row_friend, filterFriends);
+                mListView.Adapter = mAdapter;
+
+            }
+            else
+            {
+                filterFriends = (from friend in mFriends
+                                 orderby friend.Age descending
+                                 select friend).ToList<Friend>();
+
+                //Refresh the listview
+                mAdapter = new FriendsAdapter(this, Resource.Layout.row_friend, filterFriends);
+                mListView.Adapter = mAdapter;
+            }
+            mAgeAscending = !mAgeAscending;
+        }
+
+        private void MTxtHeaderLastname_Click(object sender, EventArgs e)
+        {
+            List<Friend> filterFriends;
+
+            if (!mLastnameAscending)
+            {
+                filterFriends = (from friend in mFriends
+                                 orderby friend.LastName
+                                 select friend).ToList<Friend>();
+
+                //Refresh the listview
+                mAdapter = new FriendsAdapter(this, Resource.Layout.row_friend, filterFriends);
+                mListView.Adapter = mAdapter;
+
+            }
+            else
+            {
+                filterFriends = (from friend in mFriends
+                                 orderby friend.LastName descending
+                                 select friend).ToList<Friend>();
+
+                //Refresh the listview
+                mAdapter = new FriendsAdapter(this, Resource.Layout.row_friend, filterFriends);
+                mListView.Adapter = mAdapter;
+            }
+            mLastnameAscending = !mLastnameAscending;
+        }
+
+        private void MTxtHeaderFirstname_Click(object sender, EventArgs e)
+        {
+            List<Friend> filterFriends;
+
+            if (!mFirstnameAscending)
+            {
+                filterFriends = (from friend in mFriends
+                                 orderby friend.FirstName 
+                                 select friend).ToList<Friend>();
+
+                //Refresh the listview
+                mAdapter = new FriendsAdapter(this, Resource.Layout.row_friend, filterFriends);
+                mListView.Adapter = mAdapter;
+
+            }
+            else
+            {
+                filterFriends = (from friend in mFriends
+                                 orderby friend.FirstName descending
+                                 select friend).ToList<Friend>();
+
+                //Refresh the listview
+                mAdapter = new FriendsAdapter(this, Resource.Layout.row_friend, filterFriends);
+                mListView.Adapter = mAdapter;
+            }
+            mFirstnameAscending = !mFirstnameAscending;
         }
 
         private void MSearch_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
@@ -75,6 +211,8 @@ namespace Animations
 
                 case Resource.Id.search:
                     //Search icon has been clicked
+
+                    mSearch.Visibility = ViewStates.Visible;
 
                     if (mIsAnimating)
                     {

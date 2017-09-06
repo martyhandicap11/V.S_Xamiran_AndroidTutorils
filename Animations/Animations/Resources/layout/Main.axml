@@ -16,6 +16,7 @@
             android:weightSum="100">
             <TextView
                 android:text="First Name"
+                android:id="@+id/txtHeaderFirstname"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_weight="25"
@@ -24,6 +25,7 @@
                 android:textSize="16sp" />
             <TextView
                 android:text="Last Name"
+                android:id="@+id/txtHeaderLastname"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_weight="25"
@@ -32,6 +34,7 @@
                 android:textSize="16sp" />
             <TextView
                 android:text="Age"
+                android:id="@+id/txtHeaderAge"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_weight="25"
@@ -40,6 +43,7 @@
                 android:textSize="16sp" />
             <TextView
                 android:text="Gender"
+                android:id="@+id/txtHeaderGender"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_weight="25"
@@ -64,6 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:background="@drawable/edit_text_style"
-        android:hint="Search Friends"
-        android:textColor="#000" />
+        android:hint="Search"
+        android:textColor="#000"
+        android:visibility="invisible" />
 </FrameLayout>
