@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebRequestTutorial", "WebRequestTutorial\WebRequestTutorial.csproj", "{FA14C8D7-CC21-4589-8106-4DBFFFB25CE2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FA14C8D7-CC21-4589-8106-4DBFFFB25CE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA14C8D7-CC21-4589-8106-4DBFFFB25CE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA14C8D7-CC21-4589-8106-4DBFFFB25CE2}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{FA14C8D7-CC21-4589-8106-4DBFFFB25CE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA14C8D7-CC21-4589-8106-4DBFFFB25CE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA14C8D7-CC21-4589-8106-4DBFFFB25CE2}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {78E90E67-99E1-4B1F-82BD-C0158B8D9D1A}
+	EndGlobalSection
+EndGlobal
